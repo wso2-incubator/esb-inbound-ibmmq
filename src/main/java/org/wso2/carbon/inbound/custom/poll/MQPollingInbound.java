@@ -17,7 +17,11 @@
 */
 package org.wso2.carbon.inbound.custom.poll;
 
-import com.ibm.mq.*;
+import com.ibm.mq.MQMessage;
+import com.ibm.mq.MQQueue;
+import com.ibm.mq.MQQueueManager;
+import com.ibm.mq.MQGetMessageOptions;
+import com.ibm.mq.MQException;
 import com.ibm.mq.constants.CMQC;
 import com.ibm.mq.constants.MQConstants;
 import com.ibm.mq.headers.MQMD;
