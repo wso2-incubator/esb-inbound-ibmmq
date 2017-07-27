@@ -18,7 +18,7 @@
 package org.wso2.carbon.inbound.custom.poll;
 
 import java.util.Properties;
-import java.util.UUID;
+import java.util.Stack;
 
 /**
  * IBM MQ configuration
@@ -46,6 +46,9 @@ public class MQConfiguration {
     private String keyPassword;
     private String messageID;
     private String correlationID;
+    private Stack reconnectList = new Stack();
+    private int reconnectTimeout;
+    private Stack channelList = new Stack();
 
     MQConfiguration(Properties ibmmqProperties) {
 
@@ -76,6 +79,30 @@ public class MQConfiguration {
             }
         } else {
             this.sslEnable = false;
+        }
+
+        if (ibmmqProperties.getProperty(MQConstant.CONNECTION_NAMELIST) != null) {
+            String connectionNameList[] = (ibmmqProperties.getProperty(MQConstant.CONNECTION_NAMELIST)).split(",");
+            for (String item : connectionNameList) {
+                reconnectList.push(item);
+            }
+        } else {
+            reconnectList = null;
+        }
+
+        if (ibmmqProperties.getProperty(MQConstant.CONNECTION_CHANNELLIST) != null) {
+            String channelArray[] = (ibmmqProperties.getProperty(MQConstant.CONNECTION_CHANNELLIST)).split(",");
+            for (String item : channelArray) {
+                channelList.push(item);
+            }
+        } else {
+            channelList = null;
+        }
+
+        if (ibmmqProperties.getProperty(MQConstant.RECONNECT_TIMEOUT) != null) {
+            this.reconnectTimeout = Integer.valueOf(ibmmqProperties.getProperty(MQConstant.RECONNECT_TIMEOUT));
+        } else {
+            this.reconnectTimeout = 5;
         }
 
         if (ibmmqProperties.getProperty(MQConstant.TIMEOUT) != null) {
@@ -109,7 +136,7 @@ public class MQConfiguration {
         }
 
         if (ibmmqProperties.getProperty(MQConstant.TRUST_STORE) != null) {
-            this.trustStore = System.getProperty("user.dir") + "/repository/resources/security/"+ ibmmqProperties.getProperty(MQConstant.TRUST_STORE);
+            this.trustStore = System.getProperty("user.dir") + "/repository/resources/security/" + ibmmqProperties.getProperty(MQConstant.TRUST_STORE);
         } else {
             this.trustStore = null;
         }
@@ -121,7 +148,7 @@ public class MQConfiguration {
         }
 
         if (ibmmqProperties.getProperty(MQConstant.KEY_STORE) != null) {
-            this.keyStore = System.getProperty("user.dir") + "/repository/resources/security/"+ ibmmqProperties.getProperty(MQConstant.KEY_STORE);
+            this.keyStore = System.getProperty("user.dir") + "/repository/resources/security/" + ibmmqProperties.getProperty(MQConstant.KEY_STORE);
         } else {
             this.keyStore = null;
         }
@@ -135,13 +162,13 @@ public class MQConfiguration {
         if (ibmmqProperties.getProperty(MQConstant.MESSAGE_ID) != null) {
             this.messageID = ibmmqProperties.getProperty(MQConstant.MESSAGE_ID);
         } else {
-            this.messageID = UUID.randomUUID().toString();
+            this.messageID = null;
         }
 
         if (ibmmqProperties.getProperty(MQConstant.CORRELATION_ID) != null) {
             this.correlationID = ibmmqProperties.getProperty(MQConstant.CORRELATION_ID);
         } else {
-            this.correlationID = UUID.randomUUID().toString();
+            this.correlationID = null;
         }
 
         if (ibmmqProperties.getProperty(MQConstant.HOST) != null) {
@@ -247,6 +274,14 @@ public class MQConfiguration {
         return host;
     }
 
+    public String getMessageID() {
+        return messageID;
+    }
+
+    public String getCorrelationID() {
+        return correlationID;
+    }
+
     public String getqManger() {
         return qManger;
     }
@@ -265,5 +300,17 @@ public class MQConfiguration {
 
     public String getPassword() {
         return password;
+    }
+
+    public Stack getReconnectList() {
+        return reconnectList;
+    }
+
+    public int getReconnectTimeout() {
+        return reconnectTimeout;
+    }
+
+    public Stack getChannelList() {
+        return channelList;
     }
 }

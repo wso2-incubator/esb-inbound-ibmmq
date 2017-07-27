@@ -46,5 +46,7 @@ public class MQConstant {
     public static final String KEY_PASSWORD = "keyPassword";
     public static final String MESSAGE_ID = "messageID";
     public static final String CORRELATION_ID = "correlationID";
-
+    public static final String CONNECTION_NAMELIST = "connectionNamelist";
+    public static final String RECONNECT_TIMEOUT = "reconnectTimeout";
+    public static final String CONNECTION_CHANNELLIST = "channelList";
 }

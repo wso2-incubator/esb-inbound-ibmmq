@@ -19,6 +19,7 @@ package org.wso2.carbon.inbound.custom.poll;
 
 import com.ibm.mq.*;
 import com.ibm.mq.constants.CMQC;
+import com.ibm.mq.constants.MQConstants;
 import com.ibm.mq.headers.MQMD;
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.builder.Builder;
@@ -36,7 +37,6 @@ import org.apache.synapse.core.axis2.Axis2MessageContext;
 import org.apache.synapse.mediators.base.SequenceMediator;
 import org.wso2.carbon.inbound.endpoint.protocol.generic.GenericPollingConsumer;
 
-import javax.print.DocFlavor;
 import java.io.ByteArrayInputStream;
 import java.util.Properties;
 import java.util.UUID;
@@ -78,7 +78,7 @@ public class MQPollingInbound extends GenericPollingConsumer {
             return null;
         }
 
-        manager = connectionBuilder.getQueueManager();
+        manager = connectionBuilder.getManager();
 
         MQQueue readableQueue;
 
@@ -90,11 +90,19 @@ public class MQPollingInbound extends GenericPollingConsumer {
             readableQueue = manager.accessQueue(config.getQueue(), CMQC.MQRC_READ_AHEAD_MSGS);
 
             if (readableQueue == null) {
-                logger.info("Queue not initialized properly");
+                logger.info("Queue is not initialized properly");
             } else {
 
                 MQMessage message = new MQMessage();
                 MQGetMessageOptions gmo = new MQGetMessageOptions();
+
+                if (config.getCorrelationID() != null && config.getMessageID() != null) {
+                    gmo.matchOptions = MQConstants.MQMO_MATCH_CORREL_ID + MQConstants.MQMO_MATCH_GROUP_ID;
+                } else if (config.getMessageID() != null) {
+                    gmo.matchOptions = MQConstants.MQMO_MATCH_MSG_ID;
+                } else if (config.getCorrelationID() != null) {
+                    gmo.matchOptions = MQConstants.MQMO_MATCH_CORREL_ID;
+                }
 
                 readableQueue.get(message, gmo);
                 logger.info("A message received");
@@ -111,19 +119,18 @@ public class MQPollingInbound extends GenericPollingConsumer {
                 msgCtx = this.createMessageContext();
                 msgCtx.setProperty("MessageId", new String(message.messageId));
                 msgCtx.setProperty("CorrelationID", new String(message.correlationId));
-
                 logger.info("Messsage data-" + new String(strData));
 
-                if(message.getStringProperty("ContentType")!=null) {
-                    injectMessage(new String(strData),message.getStringProperty("ContentType"));
-                }else{
-                    injectMessage(new String(strData),MQConstant.DEFAULT_CONTENT_TYPE);
+                if (message.getStringProperty("ContentType") != null) {
+                    injectMessage(new String(strData), message.getStringProperty("ContentType"));
+                } else {
+                    injectMessage(new String(strData), MQConstant.DEFAULT_CONTENT_TYPE);
                 }
                 readableQueue.close();
             }
 
         } catch (Exception e) {
-            logger.info("Queue is empty" );
+            logger.info("Queue is empty");
         }
 
         return null;
@@ -199,7 +206,7 @@ public class MQPollingInbound extends GenericPollingConsumer {
             if (manager.isConnected()) {
                 manager.close();
                 manager = null;
-            }else{
+            } else {
                 manager = null;
             }
         } catch (MQException e) {
