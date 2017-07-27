@@ -109,7 +109,7 @@ public class MQConfiguration {
         }
 
         if (ibmmqProperties.getProperty(MQConstant.TRUST_STORE) != null) {
-            this.trustStore = System.getProperty("user.dir") + "/" + ibmmqProperties.getProperty(MQConstant.TRUST_STORE);
+            this.trustStore = System.getProperty("user.dir") + "/repository/resources/security/"+ ibmmqProperties.getProperty(MQConstant.TRUST_STORE);
         } else {
             this.trustStore = null;
         }
@@ -121,7 +121,7 @@ public class MQConfiguration {
         }
 
         if (ibmmqProperties.getProperty(MQConstant.KEY_STORE) != null) {
-            this.keyStore = System.getProperty("user.dir") + "/" + ibmmqProperties.getProperty(MQConstant.KEY_STORE);
+            this.keyStore = System.getProperty("user.dir") + "/repository/resources/security/"+ ibmmqProperties.getProperty(MQConstant.KEY_STORE);
         } else {
             this.keyStore = null;
         }
