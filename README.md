@@ -11,6 +11,22 @@
 * fscontext.jar
 
 5. Test using following sample configuration through proxy
+6. For ssl import the certificate to the wso2carbon.jks using following command.
+```
+keytool -importcert -file <certificate file> -keystore <ESB>/repository/resources/security/wso2carbon.jks -alias "ibmwebspheremqqmanager"
+```
+#### SSL CipherSpecs and CipherSuites
+
+Following cipher suites tested with the given fips configuration.(Some weak cipher suites are no longer supported in IBM websphere version 8.0.0.x)
+
+CipherSpec  | Equivalent CipherSuite (Oracle JRE)|FipsRequired
+------------- | ------------- | ------------- 
+TLS_RSA_WITH_AES_128_CBC_SHA  | TLS_RSA_WITH_AES_128_CBC_SHA | False
+TLS_RSA_WITH_3DES_EDE_CBC_SHA  | SSL_RSA_WITH_3DES_EDE_CBC_SHA |False
+TLS_RSA_WITH_AES_128_CBC_SHA256  | TLS_RSA_WITH_AES_128_CBC_SHA256 |False
+TLS_RSA_WITH_AES_128_CBC_SHA  | TLS_RSA_WITH_AES_128_CBC_SHA |False
+TLS_RSA_WITH_AES_256_CBC_SHA   | TLS_RSA_WITH_AES_256_CBC_SHA |False
+TLS_RSA_WITH_AES_256_CBC_SHA256  | TLS_RSA_WITH_AES_256_CBC_SHA256 |False
 
 #### Description of the parameters
 
