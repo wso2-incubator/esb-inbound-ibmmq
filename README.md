@@ -55,6 +55,16 @@ TLS_RSA_WITH_AES_256_CBC_SHA256  | TLS_RSA_WITH_AES_256_CBC_SHA256 |False
 23. subscriptionName - Subscription name for durable subscriptions
 24. contentType - the type that the message needs to build before injecting to synapse engine
 
+####Important Notes
+
+* The username and the password parameters must be provided in order to obtain the necessary permissions to access the queue manager.
+* The channel and the queueManager parameters should be provided with the correct configuration of sslEnable parameter to establish a successful connection.
+* If the host and the port parameters not provided the connector will attempt to establish a connnection through the host "localhost" and port "1414".
+* If the messageType parameter not provided the connector will use the default message type MQMT_DATAGRAM when publishing messages.
+* If the timeout,the maxConnections and the maxUnusedConnections parameters not specified the default values of 3600,75 and 50 will be used.(3600s - 1Hr).
+* The two timeout parameters(timeout and reconnectionTimeout) should be provided in seconds.
+* If you are using a durable subscription subscriptionName parameter should be specified.
+
 #### Sample inbound configuration for get the messages from queue
 ```
 <inboundEndpoint name="class" sequence="{inject handler sequence}" onError="fault"
@@ -162,12 +172,3 @@ TLS_RSA_WITH_AES_256_CBC_SHA256  | TLS_RSA_WITH_AES_256_CBC_SHA256 |False
 </inboundEndpoint>
 
 ```
-#Important Notes
-
-* The username and the password parameters must be provided in order to obtain the necessary permissions to access the queue manager.
-* The channel and the queueManager parameters should be provided with the correct configuration of sslEnable parameter to establish a successful connection.
-* If the host and the port parameters not provided the connector will attempt to establish a connnection through the host "localhost" and port "1414".
-* If the messageType parameter not provided the connector will use the default message type MQMT_DATAGRAM when publishing messages.
-* If the timeout,the maxConnections and the maxUnusedConnections parameters not specified the default values of 3600,75 and 50 will be used.(3600s - 1Hr).
-* The two timeout parameters(timeout and reconnectionTimeout) should be provided in seconds.
-* If you are using a durable subscription subscriptionName parameter should be specified.
