@@ -55,7 +55,7 @@ TLS_RSA_WITH_AES_256_CBC_SHA256  | TLS_RSA_WITH_AES_256_CBC_SHA256 |False
 23. subscriptionName - Subscription name for durable subscriptions
 24. contentType - the type that the message needs to build before injecting to synapse engine
 
-####Important Notes
+#### Important Notes
 
 * The username and the password parameters must be provided in order to obtain the necessary permissions to access the queue manager.
 * The channel and the queueManager parameters should be provided with the correct configuration of sslEnable parameter to establish a successful connection.
