@@ -42,6 +42,8 @@ import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.Properties;
 
+import static org.wso2.carbon.inbound.custom.poll.Utils.IBMMQConnectionUtils.getQueueManager;
+
 /**
  * Polling consumer IBM MQ
  */
@@ -75,7 +77,7 @@ public class MQPollingInbound extends GenericPollingConsumer {
     private void setupConnection() {
         IBMMQConfiguration config = new IBMMQConfiguration(properties);
         try {
-            queueManager = IBMMQConnectionUtils.getQueueManager(config);
+            queueManager = getQueueManager(config);
             if (config.getQueue() != null) {
                 queue = queueManager.accessQueue(config.getQueue(), CMQC.MQRC_READ_AHEAD_MSGS);
             }

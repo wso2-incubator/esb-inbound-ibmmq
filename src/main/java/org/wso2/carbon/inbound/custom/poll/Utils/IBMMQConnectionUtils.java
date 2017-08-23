@@ -76,7 +76,7 @@ public class IBMMQConnectionUtils {
      * @throws UnrecoverableKeyException This is the exception for invalid Keys (invalid encoding, wrong length,
      *                                   uninitialized, etc).
      */
-    public static MQQueueManager getQueueManager(IBMMQConfiguration config) throws ClassNotFoundException,
+    public synchronized static MQQueueManager getQueueManager(IBMMQConfiguration config) throws ClassNotFoundException,
             KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException,
             UnrecoverableKeyException,
             KeyManagementException {
@@ -213,7 +213,7 @@ public class IBMMQConnectionUtils {
      * @param config        IBMMQConfiguration object to get the values for customized connection pool
      * @return MQSimpleConnectionManager object as customized pool
      */
-    private static synchronized MQQueueManager ConnectQueueManager(Hashtable mqEnvironment, IBMMQConfiguration config, String message) {
+    private static MQQueueManager ConnectQueueManager(Hashtable mqEnvironment, IBMMQConfiguration config, String message) {
         String status = "";
         MQQueueManager[] queueManager = {null};
         Future<String> manageConnection = Executors.newSingleThreadExecutor().submit(() -> {

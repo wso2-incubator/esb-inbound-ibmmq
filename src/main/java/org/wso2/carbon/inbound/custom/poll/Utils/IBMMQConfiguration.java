@@ -190,39 +190,39 @@ public class IBMMQConfiguration {
         //setting up default values for configuration parameters
         setupdefaultValues();
 
-        if (properties.getProperty(IBMMQConstants.PORT) != null) {
+        if (properties.get(IBMMQConstants.PORT) != null) {
             this.port = Integer.valueOf(properties.getProperty(IBMMQConstants.PORT));
         }
 
-        if (properties.getProperty(IBMMQConstants.TOPIC_NAME) != null) {
+        if (properties.get(IBMMQConstants.TOPIC_NAME) != null) {
             this.topicName = properties.getProperty(IBMMQConstants.TOPIC_NAME);
         }
 
-        if (properties.getProperty(IBMMQConstants.CONNECTION_NAMELIST) != null) {
+        if (properties.get(IBMMQConstants.CONNECTION_NAMELIST) != null) {
             Arrays.asList((properties.getProperty(IBMMQConstants.CONNECTION_NAMELIST)).split(",")).forEach(item -> reconnectList.add(item));
         }
 
-        if (properties.getProperty(IBMMQConstants.TOPIC_STRING) != null) {
+        if (properties.get(IBMMQConstants.TOPIC_STRING) != null) {
             this.topicString = properties.getProperty(IBMMQConstants.TOPIC_STRING);
         }
 
-        if (properties.getProperty(IBMMQConstants.SSL_ENABLE) != null) {
+        if (properties.get(IBMMQConstants.SSL_ENABLE) != null) {
             this.sslEnable = Boolean.valueOf(properties.getProperty(IBMMQConstants.SSL_ENABLE));
         }
 
-        if (properties.getProperty(IBMMQConstants.TIMEOUT) != null) {
+        if (properties.get(IBMMQConstants.TIMEOUT) != null) {
             this.timeout = Long.valueOf(properties.getProperty(IBMMQConstants.TIMEOUT)) * 1000;
         }
 
-        if (properties.getProperty(IBMMQConstants.RECONNECT_TIMEOUT) != null) {
+        if (properties.get(IBMMQConstants.RECONNECT_TIMEOUT) != null) {
             this.reconnectTimeout = Integer.valueOf(properties.getProperty(IBMMQConstants.RECONNECT_TIMEOUT)) * 1000;
         }
 
-        if (properties.getProperty(IBMMQConstants.MAX_CONNECTIONS) != null) {
+        if (properties.get(IBMMQConstants.MAX_CONNECTIONS) != null) {
             this.maxConnections = Integer.valueOf(properties.getProperty(IBMMQConstants.MAX_CONNECTIONS));
         }
 
-        if (properties.getProperty(IBMMQConstants.MAX_UNUSED_CONNECTIONS) != null) {
+        if (properties.get(IBMMQConstants.MAX_UNUSED_CONNECTIONS) != null) {
             this.maxUnusedConnections = Integer.valueOf(properties.getProperty(IBMMQConstants.CIPHERSUIT));
         }
 
@@ -230,75 +230,75 @@ public class IBMMQConfiguration {
             this.ciphersuit = properties.getProperty(IBMMQConstants.CIPHERSUIT);
         }
 
-        if (properties.getProperty(IBMMQConstants.CHARACTER_SET) != null) {
+        if (properties.get(IBMMQConstants.CHARACTER_SET) != null) {
             this.charSet = Integer.valueOf(properties.getProperty(IBMMQConstants.CHARACTER_SET));
         }
 
-        if (properties.getProperty(IBMMQConstants.FIPS_REQUIRED) != null) {
+        if (properties.get(IBMMQConstants.FIPS_REQUIRED) != null) {
             this.fipsRequired = Boolean.valueOf(properties.getProperty(IBMMQConstants.FIPS_REQUIRED));
         }
 
-        if (properties.getProperty(IBMMQConstants.TRUST_STORE) != null) {
+        if (properties.get(IBMMQConstants.TRUST_STORE) != null) {
             this.trustStore = System.getProperty("user.dir") + "/repository/resources/security/" + properties.getProperty(IBMMQConstants.TRUST_STORE);
         }
 
-        if (properties.getProperty(IBMMQConstants.TRUST_PASSWORD) != null) {
+        if (properties.get(IBMMQConstants.TRUST_PASSWORD) != null) {
             this.trustPassword = properties.getProperty(IBMMQConstants.TRUST_PASSWORD);
         }
 
-        if (properties.getProperty(IBMMQConstants.MESSAGE_ID) != null) {
+        if (properties.get(IBMMQConstants.MESSAGE_ID) != null) {
             this.messageID = properties.getProperty(IBMMQConstants.MESSAGE_ID);
         }
 
-        if (properties.getProperty(IBMMQConstants.CORRELATION_ID) != null) {
+        if (properties.get(IBMMQConstants.CORRELATION_ID) != null) {
             this.correlationID = properties.getProperty(IBMMQConstants.CORRELATION_ID);
         }
 
-        if (properties.getProperty(IBMMQConstants.GROUP_ID) != null) {
+        if (properties.get(IBMMQConstants.GROUP_ID) != null) {
             this.groupID = properties.getProperty(IBMMQConstants.GROUP_ID);
         }
 
-        if (properties.getProperty(IBMMQConstants.KEY_STORE) != null) {
+        if (properties.get(IBMMQConstants.KEY_STORE) != null) {
             this.keyStore = System.getProperty("user.dir") + "/repository/resources/security/" + properties.getProperty(IBMMQConstants.KEY_STORE);
         }
 
-        if (properties.getProperty(IBMMQConstants.KEY_PASSWORD) != null) {
+        if (properties.get(IBMMQConstants.KEY_PASSWORD) != null) {
             this.keyPassword = properties.getProperty(IBMMQConstants.KEY_PASSWORD);
         }
 
-        if (properties.getProperty(IBMMQConstants.HOST) != null) {
+        if (properties.get(IBMMQConstants.HOST) != null) {
             this.host = properties.getProperty(IBMMQConstants.HOST);
         }
 
-        if (properties.getProperty(IBMMQConstants.QMANAGER) != null) {
+        if (properties.get(IBMMQConstants.QMANAGER) != null) {
             this.qManger = properties.getProperty(IBMMQConstants.QMANAGER);
         }
 
-        if (properties.getProperty(IBMMQConstants.QUEUE) != null) {
+        if (properties.get(IBMMQConstants.QUEUE) != null) {
             this.queue = properties.getProperty(IBMMQConstants.QUEUE);
         }
 
-        if (properties.getProperty(IBMMQConstants.CHANNEL) != null) {
+        if (properties.get(IBMMQConstants.CHANNEL) != null) {
             this.channel = properties.getProperty(IBMMQConstants.CHANNEL);
         }
 
-        if (properties.getProperty(IBMMQConstants.USERNAME) != null) {
+        if (properties.get(IBMMQConstants.USERNAME) != null) {
             this.userName = properties.getProperty(IBMMQConstants.USERNAME);
         }
 
-        if (properties.getProperty(IBMMQConstants.PASSWORD) != null) {
+        if (properties.get(IBMMQConstants.PASSWORD) != null) {
             this.password = properties.getProperty(IBMMQConstants.PASSWORD);
         }
 
-        if (properties.getProperty(IBMMQConstants.DURABILITY) != null) {
+        if (properties.get(IBMMQConstants.DURABILITY) != null) {
             this.durability = Integer.valueOf(properties.getProperty(IBMMQConstants.DURABILITY));
         }
 
-        if (properties.getProperty(IBMMQConstants.SUBSCRIPTION_NAME) != null) {
+        if (properties.get(IBMMQConstants.SUBSCRIPTION_NAME) != null) {
             this.subscriptionName = properties.getProperty(IBMMQConstants.SUBSCRIPTION_NAME);
         }
 
-        if (properties.getProperty(IBMMQConstants.CONTENT_TYPE) != null) {
+        if (properties.get(IBMMQConstants.CONTENT_TYPE) != null) {
             this.contentType = properties.getProperty(IBMMQConstants.CONTENT_TYPE);
         }
     }

@@ -148,7 +148,7 @@ TLS_RSA_WITH_AES_256_CBC_SHA256  | TLS_RSA_WITH_AES_256_CBC_SHA256 |False
       <parameter name="channel">PASSWORD.SVRCONN</parameter>
       <parameter name="connectionNamelist">12.0.0.1/1414,127.0.0.1/1414</parameter>
       <parameter name sslEnable>true</parameter>
-      <parameter name="ciphersuit">SSL_RSA_WITH_3DES_EDE_CBC_SHA</parameter>
+      <parameter name="cipherSuite">SSL_RSA_WITH_3DES_EDE_CBC_SHA</parameter>
       <parameter name="flipsRequired">false</parameter>
       <parameter name="trustStore">wso2carbon.jks</parameter>
       <parameter name="trustPassword">wso2carbon</parameter>
@@ -162,7 +162,7 @@ TLS_RSA_WITH_AES_256_CBC_SHA256  | TLS_RSA_WITH_AES_256_CBC_SHA256 |False
 </inboundEndpoint>
 
 ```
-####Important Notes
+#Important Notes
 
 * The username and the password parameters must be provided in order to obtain the necessary permissions to access the queue manager.
 * The channel and the queueManager parameters should be provided with the correct configuration of sslEnable parameter to establish a successful connection.
