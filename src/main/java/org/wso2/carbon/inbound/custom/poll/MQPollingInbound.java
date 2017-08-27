@@ -127,7 +127,7 @@ public class MQPollingInbound extends GenericPollingConsumer {
         MQMessage message = new MQMessage();
         MQGetMessageOptions gmo = new MQGetMessageOptions();
         if (config.getCorrelationID() != null && config.getMessageID() != null) {
-            gmo.matchOptions = MQConstants.MQMO_MATCH_CORREL_ID + MQConstants.MQMO_MATCH_GROUP_ID;
+            gmo.matchOptions = MQConstants.MQMO_MATCH_CORREL_ID + MQConstants.MQMO_MATCH_MSG_ID;
             message.correlationId = config.getCorrelationID().getBytes();
             message.messageId = config.getMessageID().getBytes();
         } else if (config.getMessageID() != null) {
