@@ -128,10 +128,14 @@ public class MQPollingInbound extends GenericPollingConsumer {
         MQGetMessageOptions gmo = new MQGetMessageOptions();
         if (config.getCorrelationID() != null && config.getMessageID() != null) {
             gmo.matchOptions = MQConstants.MQMO_MATCH_CORREL_ID + MQConstants.MQMO_MATCH_GROUP_ID;
+            message.correlationId = config.getCorrelationID().getBytes();
+            message.messageId = config.getMessageID().getBytes();
         } else if (config.getMessageID() != null) {
             gmo.matchOptions = MQConstants.MQMO_MATCH_MSG_ID;
+            message.messageId = config.getMessageID().getBytes();
         } else if (config.getCorrelationID() != null) {
             gmo.matchOptions = MQConstants.MQMO_MATCH_CORREL_ID;
+            message.correlationId = config.getCorrelationID().getBytes();
         }
         try {
             if (queue != null) {
