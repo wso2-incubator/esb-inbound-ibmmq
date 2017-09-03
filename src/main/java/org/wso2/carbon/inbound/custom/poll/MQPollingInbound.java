@@ -150,7 +150,6 @@ public class MQPollingInbound extends GenericPollingConsumer {
             int strLen = message.getDataLength();
             byte[] strData = new byte[strLen];
             message.readFully(strData);
-            logger.info(new String(strData));
             injectIbmMqMessage(new String(strData), config.getcontentType());
         } catch (MQException e) {
             int reason = e.reasonCode;
