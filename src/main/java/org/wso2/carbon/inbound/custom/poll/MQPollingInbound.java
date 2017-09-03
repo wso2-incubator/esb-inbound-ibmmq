@@ -31,7 +31,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.synapse.SynapseException;
 import org.apache.synapse.core.SynapseEnvironment;
 import org.wso2.carbon.inbound.custom.poll.Utils.IBMMQConfiguration;
-import org.wso2.carbon.inbound.custom.poll.Utils.IBMMQConnectionUtils;
 import org.wso2.carbon.inbound.endpoint.protocol.generic.GenericPollingConsumer;
 
 import java.io.IOException;

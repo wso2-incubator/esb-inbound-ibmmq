@@ -132,11 +132,11 @@ public class IBMMQConnectionUtils {
         Hashtable mqEnvironment = new Hashtable();
         //configurations for ssl
         if (config.isSslEnable()) {
-            if (config.getCiphersuit().contains("TLS")) {
+            if (config.getCipherSuite().contains("TLS")) {
                 Properties props = System.getProperties();
                 props.setProperty("com.ibm.mq.cfg.useIBMCipherMappings", "false");
             }
-            mqEnvironment.put(CMQC.SSL_CIPHER_SUITE_PROPERTY, config.getCiphersuit());
+            mqEnvironment.put(CMQC.SSL_CIPHER_SUITE_PROPERTY, config.getCipherSuite());
             mqEnvironment.put(CMQC.SSL_SOCKET_FACTORY_PROPERTY, createSSLContext(config).getSocketFactory());
             mqEnvironment.put(CMQC.SSL_FIPS_REQUIRED_PROPERTY, config.getFipsRequired());
         }
@@ -202,7 +202,6 @@ public class IBMMQConnectionUtils {
 
         sslContext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(),
                 null);
-
         return sslContext;
     }
 

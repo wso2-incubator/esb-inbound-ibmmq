@@ -93,7 +93,7 @@ public class IBMMQConfiguration {
      * cipher suit specification for ibm mq connections.Note that IBM MQ versions
      * below 8.0.0.3 does not support many cipher specs.Update the IBM MQ using fix packs.
      */
-    private String ciphersuit;
+    private String cipherSuite;
 
     /**
      * Specify whether you want to enable FIPS support for an agent
@@ -227,7 +227,7 @@ public class IBMMQConfiguration {
         }
 
         if (properties.getProperty(IBMMQConstants.CIPHERSUIT) != null) {
-            this.ciphersuit = properties.getProperty(IBMMQConstants.CIPHERSUIT);
+            this.cipherSuite = properties.getProperty(IBMMQConstants.CIPHERSUIT);
         }
 
         if (properties.get(IBMMQConstants.CHARACTER_SET) != null) {
@@ -318,7 +318,7 @@ public class IBMMQConfiguration {
         this.maxConnections = 75;
         this.maxUnusedConnections = 50;
         this.sslEnable = false;
-        this.ciphersuit = null;
+        this.cipherSuite = null;
         this.fipsRequired = false;
         this.trustStore = "wso2carbon.jks";
         this.trustPassword = "wso2carbon";
@@ -359,10 +359,10 @@ public class IBMMQConfiguration {
     }
 
     /**
-     * @return variable ciphersuit.
+     * @return variable cipherSuite.
      */
-    public String getCiphersuit() {
-        return ciphersuit;
+    public String getCipherSuite() {
+        return cipherSuite;
     }
 
     /**
