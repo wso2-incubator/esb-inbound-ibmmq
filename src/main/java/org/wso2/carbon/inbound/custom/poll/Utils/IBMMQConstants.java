@@ -118,26 +118,6 @@ public class IBMMQConstants {
     public static final String SSL_ENABLE = "sslEnable";
 
     /**
-     * Name of the truststore.Use the wso2 keystore after importing the certificates.
-     */
-    public static final String TRUST_STORE = "trustStore";
-
-    /**
-     * truststore password
-     */
-    public static final String TRUST_PASSWORD = "trustPassword";
-
-    /**
-     * Name of the keystore.Use the wso2 keystore after importing the certificates.
-     */
-    public static final String KEY_STORE = "keyStore";
-
-    /**
-     * keystore password
-     */
-    public static final String KEY_PASSWORD = "keyPassword";
-
-    /**
      * Use the properties in this group to specify the message identifier for messages.
      */
     public static final String MESSAGE_ID = "messageID";
@@ -195,5 +175,10 @@ public class IBMMQConstants {
      * Name of the subscription
      */
     public static final String CONTENT_TYPE = "contentType";
+
+    /**
+     *
+     */
+    public static final String ARBITARY_SUBSCRIPTION = "arbitrarySubscription";
 
 }

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 /**
  * Class for get the IBM MQ configuration parameters for setting up connection
@@ -99,26 +100,6 @@ public class IBMMQConfiguration {
      * Specify whether you want to enable FIPS support for an agent
      */
     private boolean fipsRequired;
-
-    /**
-     * Name of the truststore.Use the wso2 keystore after importing the certificates.
-     */
-    private String trustStore;
-
-    /**
-     * truststore password
-     */
-    private String trustPassword;
-
-    /**
-     * Name of the keystore.Use the wso2 keystore after importing the certificates.
-     */
-    private String keyStore;
-
-    /**
-     * keystore password
-     */
-    private String keyPassword;
 
     /**
      * Use the properties in this group to specify the message identifier for messages.
@@ -238,14 +219,6 @@ public class IBMMQConfiguration {
             this.fipsRequired = Boolean.valueOf(properties.getProperty(IBMMQConstants.FIPS_REQUIRED));
         }
 
-        if (properties.get(IBMMQConstants.TRUST_STORE) != null) {
-            this.trustStore = System.getProperty("user.dir") + "/repository/resources/security/" + properties.getProperty(IBMMQConstants.TRUST_STORE);
-        }
-
-        if (properties.get(IBMMQConstants.TRUST_PASSWORD) != null) {
-            this.trustPassword = properties.getProperty(IBMMQConstants.TRUST_PASSWORD);
-        }
-
         if (properties.get(IBMMQConstants.MESSAGE_ID) != null) {
             this.messageID = properties.getProperty(IBMMQConstants.MESSAGE_ID);
         }
@@ -256,14 +229,6 @@ public class IBMMQConfiguration {
 
         if (properties.get(IBMMQConstants.GROUP_ID) != null) {
             this.groupID = properties.getProperty(IBMMQConstants.GROUP_ID);
-        }
-
-        if (properties.get(IBMMQConstants.KEY_STORE) != null) {
-            this.keyStore = System.getProperty("user.dir") + "/repository/resources/security/" + properties.getProperty(IBMMQConstants.KEY_STORE);
-        }
-
-        if (properties.get(IBMMQConstants.KEY_PASSWORD) != null) {
-            this.keyPassword = properties.getProperty(IBMMQConstants.KEY_PASSWORD);
         }
 
         if (properties.get(IBMMQConstants.HOST) != null) {
@@ -291,15 +256,21 @@ public class IBMMQConfiguration {
         }
 
         if (properties.get(IBMMQConstants.DURABILITY) != null) {
-            if(Boolean.valueOf(properties.getProperty(IBMMQConstants.DURABILITY))) {
+            if (Boolean.valueOf(properties.getProperty(IBMMQConstants.DURABILITY))) {
                 this.durability = CMQC.MQSO_DURABLE;
-            }else{
+            } else {
                 this.durability = CMQC.MQSO_NON_DURABLE;
             }
         }
 
         if (properties.get(IBMMQConstants.SUBSCRIPTION_NAME) != null) {
             this.subscriptionName = properties.getProperty(IBMMQConstants.SUBSCRIPTION_NAME);
+        }
+
+        if (properties.get(IBMMQConstants.ARBITARY_SUBSCRIPTION) != null) {
+            if (Boolean.valueOf(properties.getProperty(IBMMQConstants.SUBSCRIPTION_NAME))) {
+                this.subscriptionName = UUID.randomUUID().toString();
+            }
         }
 
         if (properties.get(IBMMQConstants.CONTENT_TYPE) != null) {
@@ -324,10 +295,6 @@ public class IBMMQConfiguration {
         this.sslEnable = false;
         this.cipherSuite = null;
         this.fipsRequired = false;
-        this.trustStore = "wso2carbon.jks";
-        this.trustPassword = "wso2carbon";
-        this.keyStore = "wso2carbon.jks";
-        this.keyPassword = "wso2carbon";
         this.messageID = null;
         this.correlationID = null;
         this.groupID = null;
@@ -381,34 +348,6 @@ public class IBMMQConfiguration {
      */
     public boolean isSslEnable() {
         return sslEnable;
-    }
-
-    /**
-     * @return variable trustStore.
-     */
-    public String getTrustStore() {
-        return trustStore;
-    }
-
-    /**
-     * @return variable trustPassword.
-     */
-    public String getTrustPassword() {
-        return trustPassword;
-    }
-
-    /**
-     * @return variable keyStore.
-     */
-    public String getKeyStore() {
-        return keyStore;
-    }
-
-    /**
-     * @return variable keyPassword.
-     */
-    public String getKeyPassword() {
-        return keyPassword;
     }
 
     /**

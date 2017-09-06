@@ -184,10 +184,10 @@ public class IBMMQConnectionUtils {
 
         Class.forName("com.sun.net.ssl.internal.ssl.Provider");
         KeyStore keyStore = KeyStore.getInstance("JKS");
-        keyStore.load(new FileInputStream(config.getKeyStore()), config.getKeyPassword().toCharArray());
+        keyStore.load(new FileInputStream(System.getProperty("user.dir") + "/repository/resources/security/wso2carbon.jks"), "wso2carbon".toCharArray());
 
         KeyStore trustStore = KeyStore.getInstance("JKS");
-        trustStore.load(new FileInputStream(config.getTrustStore()), config.getTrustPassword().toCharArray());
+        trustStore.load(new FileInputStream(System.getProperty("user.dir") + "/repository/resources/security/wso2carbon.jks"), "wso2carbon".toCharArray());
 
         TrustManagerFactory trustManagerFactory =
                 TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
@@ -196,7 +196,7 @@ public class IBMMQConnectionUtils {
                 KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
 
         trustManagerFactory.init(trustStore);
-        keyManagerFactory.init(keyStore, config.getKeyPassword().toCharArray());
+        keyManagerFactory.init(keyStore, "wso2carbon".toCharArray());
 
         SSLContext sslContext = SSLContext.getInstance("SSLv3");
 
