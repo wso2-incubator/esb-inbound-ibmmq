@@ -111,6 +111,7 @@ TLS_RSA_WITH_AES_256_CBC_SHA256  | TLS_RSA_WITH_AES_256_CBC_SHA256 |False
       <parameter name="maxConnections">75</parameter>
       <parameter name="maxUnusedConnections">50</parameter>
       <parameter name=timeout">3600</parameter>
+      <parameter name="durability">false</parameter>
    </parameters>
 </inboundEndpoint>
 
@@ -129,7 +130,7 @@ TLS_RSA_WITH_AES_256_CBC_SHA256  | TLS_RSA_WITH_AES_256_CBC_SHA256 |False
       <parameter name="channel">PASSWORD.SVRCONN</parameter>
       <parameter name="topicString">mytopic</parameter>
       <parameter name="topicName">topic</parameter>
-      <parameter name="durability">CMQC.MQSO_DURABLE</parameter>
+      <parameter name="durability">true</parameter>
       <parameter name="subscriptionName">mySubscription</parameter>
       <parameter name="connectionNamelist">12.0.0.1/1414,127.0.0.1/1414</parameter>
       <parameter name="reconnectTimeout">10</parameter>

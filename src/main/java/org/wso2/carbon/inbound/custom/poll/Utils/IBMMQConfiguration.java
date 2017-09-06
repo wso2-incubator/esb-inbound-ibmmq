@@ -291,7 +291,11 @@ public class IBMMQConfiguration {
         }
 
         if (properties.get(IBMMQConstants.DURABILITY) != null) {
-            this.durability = Integer.valueOf(properties.getProperty(IBMMQConstants.DURABILITY));
+            if(Boolean.valueOf(properties.getProperty(IBMMQConstants.DURABILITY))) {
+                this.durability = CMQC.MQSO_DURABLE;
+            }else{
+                this.durability = CMQC.MQSO_NON_DURABLE;
+            }
         }
 
         if (properties.get(IBMMQConstants.SUBSCRIPTION_NAME) != null) {
